@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人页面</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: 88%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .container.show {
+            opacity: 1;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-40%);
+    }
+
+        button {
+            color: #fff;
+            background-color: #2196F3;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            margin-right: 10px;
+        }
+
+        button.show {
+            opacity: 1;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+        list-style-type: none;
+        padding-left: 0;
+        }
+
+        ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        ul li strong {
+            width: 120px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcome-message">欢迎！{{userinfo['username']}}<br>这是你的个人主页</h1><br>
+        <div class="info-container">
+            <ul>
+                <li><strong>用户：</strong>{{userinfo['username']}}</li>
+                <li><strong>性别：</strong><span id="gender_span">{{userinfo['gender']}}</span><input type="text" name="gender" id="gender" value="{{userinfo['gender']}} " style="display: none" required></li>
+                <li><strong>年龄：</strong><span id="age_span">{{userinfo['age']}}</span><input type="text" name="gender" id="age" value="{{userinfo['age']}} " style="display: none" required></li>
+                <li><strong>地址：</strong><span id="address_span">{{userinfo['address']}}</span><input type="text" name="gender" id="address" value="{{userinfo['address']}} " style="display: none" required></li>
+                <li><strong>手机：</strong><span id="phone_span">{{userinfo['phone']}}</span><input type="text" name="gender" id="phone" value="{{userinfo['phone']}} " style="display: none" required></li>
+            </ul>
+        </div>
+        <div class="button-container">
+          <table>
+            <tr>
+              <td><button id="change-button">修改信息</button></td>
+              <td><button id="submit-button">提交信息</button></td>
+            </tr>
+            <tr>
+              <td><button id="homepage-button">返回主页</button></td>
+              <td><button id="logout-button">退出账户</button></td>
+            </tr>
+          </table>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载后触发动态效果
+        window.addEventListener('load', function() {
+            var container = document.querySelector('.container');
+            container.classList.add('show');
+
+            var homepageButton = document.getElementById('homepage-button');
+            homepageButton.style.opacity = 0;
+
+            var logoutButton = document.getElementById('logout-button');
+            logoutButton.style.opacity = 0;
+
+            var change_button = document.getElementById('change-button');
+            change_button.style.opacity = 0;
+
+            // submit-button
+            var submit_button = document.getElementById('submit-button');
+            submit_button.style.opacity = 0;
+
+            // 淡入动画效果
+            var opacity = 0;
+            var fadeInInterval = setInterval(function() {
+                if (opacity < 1) {
+                    opacity += 0.1;
+                    homepageButton.style.opacity = opacity;
+                    logoutButton.style.opacity = opacity;
+                    change_button.style.opacity = opacity;
+                    submit_button.style.opacity = opacity;
+                } else {
+                    clearInterval(fadeInInterval);
+                }
+            }, 100);
+
+        });
+
+        // 返回主页按钮点击事件处理
+        var homepageButton = document.getElementById('homepage-button');
+        homepageButton.addEventListener('click', function() {
+            // 编写返回主页的逻辑
+             window.location.replace ("/")
+        });
+
+        // 登出按钮点击事件处理
+        var logoutButton = document.getElementById('logout-button');
+        logoutButton.addEventListener('click', function() {
+            // 编写登出的逻辑
+            window.location.replace ("/logout")
+        });
+
+        var change_button = document.getElementById('change-button');
+        change_button.addEventListener('click', function() {
+            var infoArray = ["gender", "age", "address", "phone"];
+            for (var i = 0; i < infoArray.length; i++) {
+                var element = document.getElementById(infoArray[i]);
+                var spanElement = document.getElementById(infoArray[i] + "_span");
+                element.style.display = "inline-block";
+                spanElement.style.display = "none";
+            }
+        });
+
+        var submitButton = document.getElementById('submit-button');
+        submitButton.addEventListener('click', function() {
+            // 提交按钮点击事件处理
+        var submitButton = document.getElementById('submit-button');
+        submitButton.addEventListener('click', function() {
+        // 获取用户输入的值
+        var username = "{{userinfo['username']}}";
+        var gender = document.getElementById("gender").value;
+        var age = document.getElementById("age").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+
+        // 创建一个 XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+
+        // 设置请求方法和 URL
+        xhr.open("POST", "/changeinfo", true);
+
+        // 设置请求头部信息
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        // 监听请求状态变化
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // 请求成功
+                    console.log(xhr.responseText);
+                    // 进行相应的操作，例如显示成功提示信息或者跳转页面等
+                } else {
+                    // 请求失败
+                    console.error("请求出错：" + xhr.status);
+                    // 进行相应的操作，例如显示错误信息等
+                }
+            }
+        };
+
+            // 构造请求体
+            var requestBody = JSON.stringify({
+                username: username,
+                gender: gender,
+                age: age,
+                address: address,
+                phone: phone
+            });
+            console.log(requestBody)
+            // 发送请求
+            xhr.send(requestBody);
+            });
+            });
+
+    </script>
+</body>
+</html>

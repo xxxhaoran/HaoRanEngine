@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #2980b9, #6dd5fa);
+            animation: gradientFlow 10s linear infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h1, h2 {
+            color: white;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        form {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* 添加流动特效 */
+        table, form {
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: backwards;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50%);
+            }
+            100% {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Page</h1>
+
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Flag</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>**********************************</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.flag }}</td>
+            <td>
+                <a href="/admin/delete/{{ user.username }}">Delete</a>
+                <a href="/admin/edit/{{ user.username }}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add New User</h2>
+    <form action="/admin/add" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required><br>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="flag">Flag:</label>
+        <input type="number" id="flag" name="flag" required><br>
+
+        <input type="submit" value="Add User">
+    </form>
+</body>
+</html>

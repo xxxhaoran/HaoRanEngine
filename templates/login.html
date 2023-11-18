@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>haoRan登录页</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/CSS/login.css">
+
+</head>
+<body>
+    <div>
+        <div id="bg" class="bg" style="display: block; opacity: 1;">
+            <img src="../static/images/loginBack.jpeg">
+        </div>
+    </div>
+    <div class="container">
+        <div class="register-box">
+            <h2 class="register-title">
+                <span>没有账号，去</span>注册
+            </h2>
+            <div class="input-box">
+                <input type="text" placeholder="用户名" id="user0">
+                <input id="input" type="password" placeholder="密码">
+                <i class="fa fa-eye-slash fa1" id="eyes" aria-hidden="true"></i>
+                <input id="input1" type="password" placeholder="确认密码">
+                <i class="fa fa-eye-slash fa2" id="eyes1" aria-hidden="true"></i>
+            </div>
+            <button id="submitBtn1">注册</button>
+        </div>
+        <div class="login-box slide-up">
+            <div class="center">
+                <h2 class="login-title">
+                    <span>已有账号，去</span>登录
+                </h2>
+                <div class="input-box">
+                    <input type="text" placeholder="用户名" id="user1">
+                    <input id="input2" type="password" placeholder="密码">
+                    <i class="fa fa-eye-slash fa3" id="eyes2" aria-hidden="true"></i>
+                </div>
+                <button id="submitBtn2">登录</button>
+            </div>
+        </div>
+    </div>
+    <div id="lemon">
+        <a href="/">
+            <i class="fa fa-lemon-o" aria-hidden="true"></i>
+        </a>
+    </div>
+    <script src="../static/js/login.js"></script>
+
+</body>
+</html>

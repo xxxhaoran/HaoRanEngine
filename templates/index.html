@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haoran_Engine</title>
+    <link rel="shortcut icon" href="../static/images/icon.png" type="image/x-icon">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/CSS/hello.css">
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+<!-- //启动就加载两个函数 -->
+<body onload="time(),helloFloat('{{username}}')">
+    <div id="app">
+    	<!-- //设置的背景图片 -->
+        <div id="bg" class="bg" style="display: block; opacity: 1;">
+            <!-- 图片可替换 -->
+            <img id="image">
+        </div>
+        <!-- //设置登录按钮 -->
+        <div id="login">
+            <a href="login">
+            	<!-- //从图标库引入图标 -->
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </a>
+        </div>
+        <!-- //主体内容区 -->
+        <main id="main">
+        	<!-- //问候弹窗 -->
+            <div id="hello" class="hello"></div>
+            <!-- //时间显示标签 -->
+            <div class="timecontainer">
+                <div class="time"></div>
+            </div>
+            <!-- //搜索框的容器 -->·
+            <div class="search" id="searchbox">
+            	<!-- //搜索框 autocomplete="off"设置为off 意为关闭自动填充的下拉选项 -->
+                <input id="search" autocomplete="off" type="text" class="search-input" value="Search">
+                <!-- //搜索的放大镜图标 暂未设置 -->
+                <i class="fa fa-search" aria-hidden="true"></i> 
+            </div>
+            <!-- //聚焦搜索框时，底部弹出的诗句 -->
+            <div id="poem" class="hide">
+                <div class="poemBg"></div>
+                <span>「未觉池塘春草梦，阶前梧叶已秋声。」</span>
+                <p id="author">—— 偶成</p>
+                <button id="poemMenu" type="button">
+                    <i class=""></i>
+                </button>
+            </div>
+        </main>
+        <!-- //底部的一些信息切换 -->
+        <footer>
+            <div class="copy">
+                &copy; 2023
+            </div>
+            <div class="info">
+                    <a href="http://www.haoranblogxz.cc/" class="Ruoxin">Haoran</a>
+                    <span>&</span>
+                    <a href="http://124.222.91.197/?page_id=89">about</a>
+            </div>
+        </footer>
+        <!-- //切换日夜场景按钮 -->
+        <div id="switch">
+            <i id="switchBtn" class="fa fa-sun-o" aria-hidden="true"></i>
+        </div>
+    </div>
+
+</body>
+<script src="../static/js/hello.js"></script>
+
+
+</html>
